@@ -8,21 +8,50 @@ Then, research the question to expand on your answer. Even if you feel you have 
 
 1. As a developer, I am creating a Rails application with a model called Cohort that has_many students, but OOPS! I forgot to add the foreign key. How can I fix this mistake? What is the name of the foreign key? Would the foreign key be on the Cohort model or the Student model?
 
-Your answer:
+Your answer: I understand that this may happen from time to time when you might forget to add a foreign key. I know that the foreign key would be on the Student model as Student model is associated to the parent model of Cohort. However, I am not too sure how we would be able to this mistake. I would definitely take a look at my previous lectures about associations and lean on my resources to help resolve this issue. 
 
-Researched answer:
+Researched answer: As we are making an association between the Student model and Cohort model and are stating that Cohort has_many students, it confirms that Cohort model is the parent model and the Student model is being associated to the parent. In case that we forgot to add the foreign key to the Student model, we can simply create an active record migration which will allow us to modify the shape of an existing database and add a columm for the foreign key within the Student model. To add a new column, we use the following commands within the terminal: 
+ // In terminal: 
+ $ rails generate migration add_column_student_id
+ 
+ After we run this command, a new file is created and added to the migrate directory. We can open this file up to see that there is a def change method that has already been created for us - this is where we can edit and make changes to add a new colum. To add a column, we add a new line into our method like this: 
+
+// In db/migrate
+  def change
+  add_column :cohorts, :student_id, :integer 
+  end
+end 
+
+To save the file, we run the next command
+ // In terminal: 
+
+ $rails db:migrate
+
 
 2. Which RESTful routes must always be passed params? Why?
 
-Your answer:
+Your answer: I believe the routes that must always be passed params are show, edit, update, and destory. This is because all four routes need a param passed to find the primary key value of the instance that needs to be either shown, edited/updated, or destroyed. Without passing params, you would not be able to call for a specific instance. 
 
-Researched answer:
+Researched answer: The routes that must be passed params are show, edit, update and destroy. This is because all four routes need a param passed to find the primary key value of the instance that needs to be either shown, edited/updated, or destroyed. Without passing params, you would not be able to call for a specific instance which would result in not being able to see, edit or delete an individual instance. It is important that these RESTful routes pass params because it makes the page more dynamic and allows the developer to add more information into the route rather then having to do it directly to the URL.
 
 3. Name three rails generator commands. What is created by each?
 
-Your answer:
+Your answer: 
+
+$rails g migration - this creates a migrate file within the database folder which allows you to change the shape of the data base by adding columns.
+
+$rails g resource - creates the RESTful routes and all files you may need for your database
+
+$rails g model - creates the model file and you are able to create new instances from the class
 
 Researched answer:
+
+$rails g model - creates the model file and you are able to create new instances from the class. Along with using this command, you must also include the name of the model, the name of each of the columns and what data type the column will has as arguments. When you go into your application , you will see that a model file was created and named after the name you've assigned it. 
+
+$rails g migration - this creates a migrate file within the database folder which allows you to change the shape of the data base by adding columns, creating a table, and changing tables just to name a few. It essentially allows for modifications in case something needs to be changed within your already created database 
+
+$rails g resource - May be considered one of the more useful commands because it generates a model with the columns you need along with its associated data types, it generates a controller, view folder, migrations and the RESTful routes.
+
 
 4. Consider the Rails routes below. What is the name of the controller method that would be called by each route? What action would each of the controller methods perform?
 
@@ -45,6 +74,20 @@ action: "PATCH" location: /students/2
     Update - This controller allows to overwrite a value of an instance using the edit form. 
 
 action: "DELETE" location: /students/2
-    Destroy - This controller is used to delete an  instance. In this example, the instance with the     primary index of 2 would be deleted from the    database 
+    Destroy - This controller is used to delete an  instance. In this example, the instance with the primary index of 2 would be deleted from the database 
 
 5. As a developer, you are making an application to manage your to do list. Create 10 user stories that will help you get your application started. Read more about [user stories](https://www.atlassian.com/agile/project-management/user-stories).
+
+User Stories: 
+
+As a developer, I can create a full stack Rails application for a to do list 
+As a developer, my to do list can have a task, description, due date, and status 
+As a developer, I can add new tasks directly to my database 
+As a user, I can see all tasks listed on the home page 
+As a user, I can click on a task to route to a page that displays all information for that one task 
+As a user, I can see a button on the home page that will take me to a new page where I can create a new task
+As a user, I can see a form to create a new task 
+As a user, when I create a new task, there is a button that will submit the task to the database
+As a user, I can edit a task's status from not complete to complete 
+As a user, I can delete a task 
+As a user, I can navigate from the form back to the home page to see all tasks 
