@@ -34,6 +34,8 @@ Your answer: I believe the routes that must always be passed params are show, ed
 
 Researched answer: The routes that must be passed params are show, edit, update and destroy. This is because all four routes need a param passed to find the primary key value of the instance that needs to be either shown, edited/updated, or destroyed. Without passing params, you would not be able to call for a specific instance which would result in not being able to see, edit or delete an individual instance. It is important that these RESTful routes pass params because it makes the page more dynamic and allows the developer to add more information into the route rather then having to do it directly to the URL.
 
+I have used params before while creating a RESTful routes. By using params, it makes my route more dynamic vs creating a static route that has a hard coded primary id key within it. This lessens the amount of routes you may need and in turn, creates an easier to read and easier to follow route. 
+
 3. Name three rails generator commands. What is created by each?
 
 Your answer: 
@@ -46,11 +48,13 @@ $rails g model - creates the model file and you are able to create new instances
 
 Researched answer:
 
-$rails g model - creates the model file and you are able to create new instances from the class. Along with using this command, you must also include the name of the model, the name of each of the columns and what data type the column will has as arguments. When you go into your application , you will see that a model file was created and named after the name you've assigned it. 
+$rails g model - creates the model file and you are able to create new instances from the class. Along with using this command, you must also include the name of the model, the name of each of the columns and what data type the column will has as arguments. When you go into your application, you will see that a model file was created and named after the name you've assigned it, as well as the columns that will be included and what data type it will take in. 
 
-$rails g migration - this creates a migrate file within the database folder which allows you to change the shape of the data base by adding columns, creating a table, and changing tables just to name a few. It essentially allows for modifications in case something needs to be changed within your already created database 
+I have used this command in the past when I wanted to create a model file. For example, if I was making a model to track cookie sales, I might name my model Cookie and it would have a column to track the amount of cookies in stock (takes in an integer), cookie name (takes in a string), cost to make 1 cookie (integer), and ingredients (string). It is a helpful command to be able to create your model with all your columns that you might need. However, in case you forget to generate one column, you still have the ability to generate another column that will be attached to the model. To do this, you will simply use another command $rails g migration. 
 
-$rails g resource - May be considered one of the more useful commands because it generates a model with the columns you need along with its associated data types, it generates a controller, view folder, migrations and the RESTful routes.
+$rails g migration - this creates a migrate file within the database folder which allows you to change the shape of the data base by adding columns, creating a table, and changing tables just to name a few. It essentially allows for modifications in case something needs to be changed within your already created database. Going off of the previous example of forgetting to create a certain column - For example, if I was creating a model to track cookie sales and I forgot to have a column that would be used to track the amount of cookies are sold weekly, I can use this command to add a column after I had already generated the model. 
+
+$rails g resource - May be considered one of the more useful commands because it generates a model with the columns you need along with its associated data types, it generates a controller, view folder, migrations and the RESTful routes. This is one of the newest generate commands that I have learned about. This is a super useful command because it cuts out several steps from creating an application. As this command generates mulitple files, the developer does not to need to remember to run multiple commands to generate all the files they need or need to create the RESTful routes themselves. This saves the developer in set up time and makes them more efficient. 
 
 
 4. Consider the Rails routes below. What is the name of the controller method that would be called by each route? What action would each of the controller methods perform?
@@ -84,7 +88,7 @@ As a developer, I can create a full stack Rails application for a to do list
 As a developer, my to do list can have a task, description, due date, and status 
 As a developer, I can add new tasks directly to my database 
 As a user, I can see all tasks listed on the home page 
-As a user, I can click on a task to route to a page that displays all information for that one task 
+As a user, I can click on a task to route to a new page that displays all information for that one task 
 As a user, I can see a button on the home page that will take me to a new page where I can create a new task
 As a user, I can see a form to create a new task 
 As a user, when I create a new task, there is a button that will submit the task to the database
